@@ -714,7 +714,7 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 				memset(&header, 0, sizeof(header));
 				header.nextTs.track = newTs.track;
 				header.nextTs.sector = newTs.sector;
-				// set offset into file
+				// set TSL offset
 				header.offset = (i - TSL_MAX_NUMBER) * 256;
 				//
 				fseek(dskFile, diskOffset(oldTs.track, oldTs.sector), SEEK_SET);
@@ -734,7 +734,6 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 			memset(&dataTs, 0, sizeof(dataTs));
 			tslPointer = 0;
 		}
-
 		/* allocate a sector */
 		if (!dos33FindAndAllocSector(&newTs)) {
 			return;
@@ -747,6 +746,10 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 	}
 	// Save last TSL
 	memset(&header, 0, sizeof(header));
+	if (i > TSL_MAX_NUMBER) {
+		// set TSL offset
+		header.offset = (i - TSL_MAX_NUMBER) * 256;
+	}
 	fseek(dskFile, diskOffset(oldTs.track, oldTs.sector), SEEK_SET);
 	r = fwrite(&header, 1, sizeof(header), dskFile);
 	if (r < 0) {

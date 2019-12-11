@@ -1,0 +1,59 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.default.includePath": [
+			"inc",
+			"${default}"
+		],
+		"files.associations": {
+			"unistd.h": "c",
+			"string.h": "c",
+			"array": "c",
+			"*.tcc": "c",
+			"cctype": "c",
+			"cerrno": "c",
+			"cfloat": "c",
+			"climits": "c",
+			"clocale": "c",
+			"cmath": "c",
+			"cstdarg": "c",
+			"cstddef": "c",
+			"cstdint": "c",
+			"cstdio": "c",
+			"cstdlib": "c",
+			"cwchar": "c",
+			"cwctype": "c",
+			"list": "c",
+			"string": "c",
+			"unordered_map": "c",
+			"vector": "c",
+			"exception": "c",
+			"functional": "c",
+			"fstream": "c",
+			"initializer_list": "c",
+			"ios": "c",
+			"iosfwd": "c",
+			"istream": "c",
+			"limits": "c",
+			"new": "c",
+			"ostream": "c",
+			"sstream": "c",
+			"stdexcept": "c",
+			"streambuf": "c",
+			"cinttypes": "c",
+			"tuple": "c",
+			"type_traits": "c",
+			"utility": "c",
+			"typeinfo": "c",
+			"wav.h": "c",
+			"dos33.h": "c"
+		},
+		"terminal.integrated.env.windows": {
+			"path": "d:\\uteis;d:\\uteis\\linux;d:\\uteis\\console;c:\\winbuilds\\bin"
+		},
+	}
+}

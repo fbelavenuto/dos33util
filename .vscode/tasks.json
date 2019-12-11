@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build with Makefile",
+        "type": "shell",
+        "command": "make.exe",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "Clean",
+        "type": "shell",
+        "command": "make.exe clean",
+        "problemMatcher": []
+      }
+    ]
+  }
+  

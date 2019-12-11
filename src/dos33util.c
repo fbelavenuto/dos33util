@@ -241,8 +241,8 @@ static int dos33GetNextCatEntry() {
 	int						r;
 	struct ScatalogHeader	header;
 
-	if (catEntry.nextTs.track == 0 || catEntry.entryNum == 8) {
-		if (catEntry.entryNum == 8) {
+	if (catEntry.nextTs.track == 0 || catEntry.entryNum == 7) {
+		if (catEntry.entryNum == 7) {
 			catEntry.actTs.track = catEntry.nextTs.track;
 			catEntry.actTs.sector = catEntry.nextTs.sector;
 		} else {
@@ -258,7 +258,7 @@ static int dos33GetNextCatEntry() {
 			exit(1);
 		}
 		catEntry.nextTs.track = header.nextTs.track;
-		catEntry.nextTs.sector = header.nextTs.track;
+		catEntry.nextTs.sector = header.nextTs.sector;
 		catEntry.entryNum = 0;
 	}
 	r = fread(&catEntry.fileEntry, 1, sizeof(catEntry.fileEntry), dskFile);

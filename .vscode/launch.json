@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/dos33util.exe",
-            "args": ["teste.do", "save", "HELLO#FC0801"],
+            "args": ["teste.do", "catalog"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

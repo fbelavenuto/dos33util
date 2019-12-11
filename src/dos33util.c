@@ -747,8 +747,6 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 	}
 	// Save last TSL
 	memset(&header, 0, sizeof(header));
-	// set offset into file
-	header.offset = (i - TSL_MAX_NUMBER) * 256;	// TODO: need this?
 	fseek(dskFile, diskOffset(oldTs.track, oldTs.sector), SEEK_SET);
 	r = fwrite(&header, 1, sizeof(header), dskFile);
 	if (r < 0) {

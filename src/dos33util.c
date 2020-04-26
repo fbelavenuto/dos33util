@@ -694,9 +694,6 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 
 		// Create new T/S list if necessary
 		if (i % TSL_MAX_NUMBER == 0) {
-			// Save actual TS
-			oldTs.track = newTs.track;
-			oldTs.sector = newTs.sector;
 			// allocate a sector for the new list
 			if (!dos33FindAndAllocSector(&newTs)) {
 				return;
@@ -706,9 +703,6 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 				// Is the first allocation, just save in the file entry
 				catEntry.fileEntry.TsList.track = newTs.track;
 				catEntry.fileEntry.TsList.sector = newTs.sector;
-				// Uses oldTs to indicate actual TS
-				oldTs.track = newTs.track;
-				oldTs.sector = newTs.sector;
 			} else {
 				// New TSL sector, save actual
 				memset(&header, 0, sizeof(header));
@@ -731,6 +725,9 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 					}
 				}
 			}
+			// Uses oldTs to indicate actual TS
+			oldTs.track = newTs.track;
+			oldTs.sector = newTs.sector;
 			memset(&dataTs, 0, sizeof(dataTs));
 			tslPointer = 0;
 		}
@@ -763,7 +760,7 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 			exit(1);
 		}
 	}
-
+	fflush(dskFile);
 	// Sectors allocated, now read TSs and save file
 	newTs.track = catEntry.fileEntry.TsList.track;
 	newTs.sector = catEntry.fileEntry.TsList.sector;

@@ -582,7 +582,7 @@ static void dos33UndeleteFile(char *appleFilename) {
 /*****************************************************************************/
 static void cmdSave(char *inputFilename, char *appleFilename) {
 	FILE				*inputFile;
-	int					i, r, length, fileSize, offset;
+	int					i, r, length, fileSize, offset, tsOffset;
 	int					freeSpace, neededSectors, sizeInSectors, sectorsUsed;
 	struct Sts			oldTs, newTs, dataTs[TSL_MAX_NUMBER];
 	struct StslHeader	header;
@@ -690,6 +690,7 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 	sectorsUsed = 0;
 	newTs.track = 0;
 	newTs.sector = 0;
+	tsOffset = 0;
 	while (i < sizeInSectors) {
 
 		// Create new T/S list if necessary
@@ -709,7 +710,8 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 				header.nextTs.track = newTs.track;
 				header.nextTs.sector = newTs.sector;
 				// set TSL offset
-				header.offset = (i - TSL_MAX_NUMBER) * 256;
+				header.offset = tsOffset;
+				tsOffset += i;
 				//
 				fseek(dskFile, diskOffset(oldTs.track, oldTs.sector), SEEK_SET);
 				r = fwrite(&header, 1, sizeof(header), dskFile);
@@ -745,7 +747,7 @@ static void cmdSave(char *inputFilename, char *appleFilename) {
 	memset(&header, 0, sizeof(header));
 	if (i > TSL_MAX_NUMBER) {
 		// set TSL offset
-		header.offset = (i - TSL_MAX_NUMBER) * 256;
+		header.offset = tsOffset;
 	}
 	fseek(dskFile, diskOffset(oldTs.track, oldTs.sector), SEEK_SET);
 	r = fwrite(&header, 1, sizeof(header), dskFile);
